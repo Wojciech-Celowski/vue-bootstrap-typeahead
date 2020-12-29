@@ -7,16 +7,16 @@
         </slot>
       </div>
       <input
-        ref="input"
-        type="search"
-        :class="`form-control ${inputClass}`"
-        :placeholder="placeholder"
-        :aria-label="placeholder"
-        :value="inputValue"
-        @focus="isFocused = true"
-        @blur="handleBlur"
-        @input="handleInput($event.target.value)"
-        autocomplete="off"
+          ref="input"
+          type="search"
+          :class="`form-control ${inputClass}`"
+          :placeholder="placeholder"
+          :aria-label="placeholder"
+          :value="inputValue"
+          @focus="isFocused = true"
+          @blur="handleBlur"
+          @input="handleInput($event.target.value)"
+          autocomplete="off"
       />
       <div v-if="$slots.append || append" class="input-group-append">
         <slot name="append">
@@ -25,16 +25,16 @@
       </div>
     </div>
     <vue-bootstrap-typeahead-list
-      class="vbt-autcomplete-list"
-      ref="list"
-      v-show="isFocused && data.length > 0"
-      :query="inputValue"
-      :data="formattedData"
-      :background-variant="backgroundVariant"
-      :text-variant="textVariant"
-      :maxMatches="maxMatches"
-      :minMatchingChars="minMatchingChars"
-      @hit="handleHit"
+        class="vbt-autcomplete-list"
+        ref="list"
+        v-show="isFocused && data.length > 0"
+        :query="inputValue"
+        :data="formattedData"
+        :background-variant="backgroundVariant"
+        :text-variant="textVariant"
+        :maxMatches="maxMatches"
+        :minMatchingChars="minMatchingChars"
+        @hit="handleHit"
     >
       <!-- pass down all scoped slots -->
       <template v-for="(slot, slotName) in $scopedSlots" :slot="slotName" slot-scope="{ data, htmlText }">
@@ -116,6 +116,15 @@ export default {
     }
   },
 
+  watch: {
+    value: {
+      immediate: true,
+      handler (val) {
+        this.inputValue = val
+      }
+    }
+  },
+
   methods: {
     resizeList(el) {
       const rect = el.getBoundingClientRect()
@@ -183,11 +192,11 @@ export default {
 </script>
 
 <style scoped>
-  .vbt-autcomplete-list {
-    padding-top: 5px;
-    position: absolute;
-    max-height: 350px;
-    overflow-y: auto;
-    z-index: 999;
-  }
+.vbt-autcomplete-list {
+  padding-top: 5px;
+  position: absolute;
+  max-height: 350px;
+  overflow-y: auto;
+  z-index: 999;
+}
 </style>
