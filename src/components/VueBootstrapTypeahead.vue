@@ -7,6 +7,7 @@
         </slot>
       </div>
       <input
+          :disabled="isDisabled"
           ref="input"
           type="search"
           :class="`form-control ${inputClass}`"
@@ -60,6 +61,12 @@ export default {
   },
 
   props: {
+    isDisabled: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
     size: {
       type: String,
       default: null,
